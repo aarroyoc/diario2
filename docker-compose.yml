@@ -8,16 +8,19 @@ services:
    POSTGRES_DB: postgres
    POSTGRES_USER: postgres
    POSTGRES_PASSWORD: postgres
+   POSTGRES_HOST_AUTH_METHOD: password
   healthcheck:
    test: ["CMD-SHELL","pg_isready -U postgres"]
    interval: 10s
    timeout: 2s
    retries: 10
   restart: always
+  ports:
+    - "5432:5432"
  diario:
   build: .
   ports:
-   - "6789:6789"
+   - "9099:9099"
   restart: always
   depends_on:
    - postgres
